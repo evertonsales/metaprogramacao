@@ -11,32 +11,32 @@ import (
 )
 
 type TInstrucao = struct {
-	comando 		string
-	parametro		string
+	comando					string
+	parametro				string
 }
 
 type TFuncRota = func(entrada... TInstrucao)
 
 type CRUD_MOD1_campos struct {
-	Id 					string
-	Nome				string
-	Titulo				string
+	Id						string
+	Nome					string
+	Titulo					string
 }
 
 type CRUD_MOD1_input struct {
-	ModuleBase			string
-	IdModulo			string
-	Titulo 				string
-	TituloSingular 		string
-	Campos 				[]CRUD_MOD1_campos
+	ModuleBase				string
+	IdModulo				string
+	Titulo					string
+	TituloSingular			string
+	Campos					[]CRUD_MOD1_campos
 }
 
 type TDSLExecutor struct {
 	//Propriedades privadas
-	comandoAtivo       	TFuncRota
-	bufferComandoAtivo 	[]TInstrucao
-	comandos           	map[string]TFuncRota
-	CRUD_MOD1			CRUD_MOD1_input
+	comandoAtivo			TFuncRota
+	bufferComandoAtivo		[]TInstrucao
+	comandos           		map[string]TFuncRota
+	CRUD_MOD1				CRUD_MOD1_input
 }
 
 const
@@ -60,14 +60,6 @@ func (self *TDSLExecutor) gerarLinguagemObjeto(){
 }
 
 func (self *TDSLExecutor) criar_modulo(entrada... TInstrucao){
-	/*
-		os.RemoveAll("NOVO")
-		err := os.MkdirAll("NOVO", 0755)
-		if err != nil {
-			panic(err)
-		}
-	*/
-
 	for _, array := range entrada {
 		switch comando := array.comando; comando {
 		case "modulo_base":
@@ -91,7 +83,6 @@ func (self *TDSLExecutor) adicionar_campo(entrada... TInstrucao){
 	self.CRUD_MOD1.Campos = append(self.CRUD_MOD1.Campos, CRUD_MOD1_campos{})
 
 	for _, array := range entrada {
-
 		switch comando := array.comando; comando {
 		case "id_campo":
 			self.CRUD_MOD1.Campos[len(self.CRUD_MOD1.Campos)-1].Id = self.CRUD_MOD1.IdModulo + "_" + array.parametro
@@ -126,12 +117,12 @@ func (self *TDSLExecutor) processaLinhaDSL(instrucao string) {
 
 		fmt.Println(instrucao)
 	} else {
-			chave_valor_array := strings.SplitN(instrucao, " ", 2)
+		chave_valor_array := strings.SplitN(instrucao, " ", 2)
 
-			//Ignora aspas
-			chave_valor_array[1] = chave_valor_array[1][1:len(chave_valor_array[1])-1]
+		//Ignora aspas
+		chave_valor_array[1] = chave_valor_array[1][1:len(chave_valor_array[1])-1]
 
-			chave_valor := TInstrucao{comando: chave_valor_array[0], parametro: chave_valor_array[1]}
+		chave_valor := TInstrucao{comando: chave_valor_array[0], parametro: chave_valor_array[1]}
 
 		self.bufferComandoAtivo = append(self.bufferComandoAtivo, chave_valor)
 	}
@@ -177,7 +168,7 @@ func (self *TDSLExecutor) ExecutaArquivoDSL(arquivoNome string){
 }
 
 func Novo_TDSLExecutor() (novoObj *TDSLExecutor) {
-	novoObj = &TDSLExecutor{
+	novoObj = &TDSLExecutor {
 		comandoAtivo: nil,
 		bufferComandoAtivo: make([]TInstrucao, 0),
 		comandos: make(map[string]TFuncRota),
@@ -192,7 +183,7 @@ func Novo_TDSLExecutor() (novoObj *TDSLExecutor) {
 
 func main() {
 	argumentos := os.Args
-	if len(argumentos) < 2{
+	if len(argumentos) < 2 {
 		fmt.Print("É preciso informar o arquivo DSL para gerar um programa final.")
 	} else {
 		DSLExecutorObj := Novo_TDSLExecutor()
