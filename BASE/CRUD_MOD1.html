@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{.Titulo}}</title>
+    <link rel="stylesheet" href="thirdParts/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="thirdParts/css/bootstrap-theme.min.css" />
+</head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h2>{{.Titulo}}</h2>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <table id="{{.IdModulo}}Table" class="table table-bordered table-condensed table-striped">
+                        <thead>
+                        <tr>
+                        {{range .Campos}}
+                            <th>{{.Titulo}}</th>
+                        {{end}}
+                            <th>Editar</th>
+                            <th>Excluir</th>
+                        </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">Dados de {{.TituloSingular}}</div>
+                        <div class="panel-body">
+                            <form id="{{.IdModulo}}-form">
+                            {{range .Campos}}
+                                <div class="form-group">
+                                    <label for="{{.Id}}">{{.Titulo}}:</label>
+                                    <input type="text" name="{{.Nome}}" id="{{.Id}}" class="form-control input-lg"
+                                           placeholder="{{.Titulo}}">
+                                </div>
+                            {{end}}
+                                <div class="form-group">
+                                    <button type="submit" id="updateButton" class="btn btn-lg btn-primary">
+                                        Adicionar {{.TituloSingular}}
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script type="text/html" id="{{.IdModulo}}Template">
+            <tr>
+            {{range .Campos}}
+                <td><%- {{.Nome}} %></td>
+            {{end}}
+
+                <td>
+                    <button type='button' class='{{.IdModulo}}-edit btn btn-default' data-id='<%- id %>'>
+                        <span class='glyphicon glyphicon-edit'></span>
+                    </button>
+                </td>
+                <td>
+                    <button type='button' class='{{.IdModulo}}-delete btn btn-default' data-id='<%- id %>'>
+                        <span class='glyphicon glyphicon-remove'></span>
+                    </button>
+                </td>
+            </tr>
+        </script>
+
+        <script src="thirdParts/js/lodash.min.js"></script>
+        <script src="thirdParts/js/jquery.min.js"></script>
+        <script src="thirdParts/js/bootstrap.min.js"></script>
+        <script src="{{.IdModulo}}-form.js"></script>
+        <script src="{{.IdModulo}}-table.js"></script>
+        <script src="{{.IdModulo}}-main.js"></script>
+    </body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Cadastro</title>
+
+    <link rel="stylesheet" href="thirdParts/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="thirdParts/css/bootstrap-theme.min.css" />
+
+    <!-- HTML5 Shiv and Respond.js para IE8 suportar elementos HTML5 -->
+    <!-- ATENÇÃO: Respond.js não funciona via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h2>Clientes</h2>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <table id="clienteTable" class="table table-bordered table-condensed table-striped">
+                        <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Idade</th>
+                            <th>Cidade</th>
+                            <th>Estado</th>
+                            <th>Editar</th>
+                            <th>Excluir</th>
+                        </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">Dados do Cliente</div>
+                        <div class="panel-body">
+                            <form id="cliente-form">
+                                <div class="form-group">
+                                    <label for="cliente_nome">Nome</label>
+                                    <input type="text" name="nome" id="cliente_nome" class="form-control input-lg"
+                                           placeholder="Nome">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="cliente_idade">Idade</label>
+                                    <input type="text" name="idade" id="cliente_idade" class="form-control input-lg"
+                                           placeholder="Idade">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="cliente_cidade">Cidade</label>
+                                    <input type="text" name="cidade" id="cliente_cidade" class="form-control input-lg"
+                                           placeholder="Cidade">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="cliente_estado">Estado</label>
+                                    <input type="text" name="estado" id="cliente_estado" class="form-control input-lg"
+                                           placeholder="Estado">
+                                </div>
+
+                                <div class="form-group">
+                                    <button type="submit" id="updateButton" class="btn btn-lg btn-primary">
+                                        Adicionar Cliente
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script type="text/html" id="clienteTemplate">
+            <tr>
+                <td><%- nome %></td>
+                <td><%- idade %></td>
+                <td><%- cidade %></td>
+                <td><%- estado %></td>
+                <td>
+                    <button type='button' class='cliente-edit btn btn-default' data-id='<%- id %>'>
+                        <span class='glyphicon glyphicon-edit'></span>
+                    </button>
+                </td>
+                <td>
+                    <button type='button' class='cliente-delete btn btn-default' data-id='<%- id %>'>
+                        <span class='glyphicon glyphicon-remove'></span>
+                    </button>
+                </td>
+            </tr>
+        </script>
+
+        <script src="thirdParts/js/lodash.min.js"></script>
+        <script src="thirdParts/js/jquery.min.js"></script>
+        <script src="thirdParts/js/bootstrap.min.js"></script>
+        <script src="clientes-form.js"></script>
+        <script src="clientes-table.js"></script>
+        <script src="clientes-main.js"></script>
+    </body>
+</html>
